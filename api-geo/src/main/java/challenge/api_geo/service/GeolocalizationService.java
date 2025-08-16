@@ -3,7 +3,7 @@ package challenge.api_geo.service;
 import challenge.api_geo.config.RabbitMQConfig;
 import challenge.api_geo.dto.request.GeolocalizationRequestDTO;
 import challenge.api_geo.entity.GeolocalizationEntity;
-import challenge.api_geo.messaging.GeocodingRequestMessage;
+import challenge.api_geo.dto.request.GeocodingRequestMessageDTO;
 import challenge.api_geo.repository.GeolocalizationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -33,7 +33,7 @@ public class GeolocalizationService {
         GeolocalizationEntity saved = geolocalizationRepository.save(entity);
 
         // 2) Armar el mensaje para el geocodificador
-        GeocodingRequestMessage msg = new GeocodingRequestMessage(
+        GeocodingRequestMessageDTO msg = new GeocodingRequestMessageDTO(
                 saved.getId(),
                 saved.getStreet(),
                 saved.getNumber(),
@@ -44,7 +44,7 @@ public class GeolocalizationService {
         );
 
         // 3) Enviar a la cola (default exchange → routingKey = nombre de la cola)
-        rabbitTemplate.convertAndSend(RabbitMQConfig.GEO_REQUESTS_QUEUE, msg);
+        rabbitTemplate.convertAndSend(RabbitMQConfig.REQUESTS_QUEUE, msg);
 
         return saved.getId();
     }

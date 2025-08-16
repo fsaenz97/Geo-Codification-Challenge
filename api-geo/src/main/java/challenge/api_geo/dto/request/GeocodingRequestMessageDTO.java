@@ -1,4 +1,4 @@
-package challenge.api_geo.messaging;
+package challenge.api_geo.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,8 +6,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-@Data @NoArgsConstructor @AllArgsConstructor
-public class GeocodingRequestMessage {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class GeocodingRequestMessageDTO {
     private UUID id;
     private String street;
     private String number;

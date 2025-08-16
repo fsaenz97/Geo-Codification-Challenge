@@ -11,12 +11,17 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-    public static final String GEO_REQUESTS_QUEUE = "geocoding_requests_queue";
+    public static final String REQUESTS_QUEUE  = "geocoding_requests_queue";
+    public static final String RESPONSES_QUEUE = "geocoding_responses_queue";
 
     @Bean
     public Queue geocodingRequestsQueue() {
-        // durable = true para que la cola persista
-        return new Queue(GEO_REQUESTS_QUEUE, true);
+        return new Queue(REQUESTS_QUEUE, true);
+    }
+
+    @Bean
+    public Queue geocodingResponsesQueue() {
+        return new Queue(RESPONSES_QUEUE, true);
     }
 
     @Bean
@@ -25,10 +30,9 @@ public class RabbitMQConfig {
     }
 
     @Bean
-    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory,
-                                         MessageConverter messageConverter) {
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory, MessageConverter mc) {
         RabbitTemplate template = new RabbitTemplate(connectionFactory);
-        template.setMessageConverter(messageConverter);
+        template.setMessageConverter(mc);
         return template;
     }
 }
