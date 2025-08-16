@@ -5,22 +5,21 @@ import lombok.Data;
 
 @Data
 public class GeolocalizationRequestDTO {
-
-    @NotBlank(message = "La calle no puede estar vacía")
+    @NotBlank(message = "La calle no puede estar vacia")
     private String street;
 
-    @NotBlank(message = "El número no puede estar vacío")
+    @NotBlank(message = "El numero no puede estar vacio")
     private String number;
 
-    @NotBlank(message = "La ciudad no puede estar vacía")
+    @NotBlank(message = "La ciudad no puede esta vacia")
     private String city;
 
-    @NotBlank(message = "El código postal no puede estar vacío")
+    @NotBlank(message = "El codigo postal no puede estar vacio")
     private String postalCode;
 
-    @NotBlank(message = "La provincia no puede estar vacía")
+    @NotBlank(message = "La provincia no puede estar vacia")
     private String province;
 
-    @NotBlank(message = "El país no puede estar vacío")
+    @NotBlank(message = "El pais no puede estar vacio")
     private String country;
 }

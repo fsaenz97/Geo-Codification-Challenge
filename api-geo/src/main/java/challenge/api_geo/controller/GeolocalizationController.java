@@ -1,6 +1,7 @@
 package challenge.api_geo.controller;
 
 import challenge.api_geo.dto.request.GeolocalizationRequestDTO;
+import challenge.api_geo.dto.response.IdResponseDTO;
 import challenge.api_geo.service.GeolocalizationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,25 +20,20 @@ public class GeolocalizationController {
     private final GeolocalizationService geolocalizationService;
 
     @PostMapping
-    public ResponseEntity<?> geolocalizar(@Valid @RequestBody GeolocalizationRequestDTO request) {
-        // 1 Llama al servicio para procesar la solicitud
+    public ResponseEntity<IdResponseDTO> geolocalizar(@Valid @RequestBody GeolocalizationRequestDTO request) {
         UUID requestId = geolocalizationService.processGeolocalizationRequest(request);
 
-        // 2 Construye la URL para el endpoint de consulta
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(requestId)
                 .toUri();
 
-        // 3 Devuelve la respuesta HTTP 202 Accepted
-        return ResponseEntity.accepted().location(location).body(requestId);
+        return ResponseEntity
+                .accepted()
+                .location(location)
+                .body(new IdResponseDTO(requestId.toString()));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<String> getGeolocalizacion(@PathVariable UUID id) {
-        // Solo devuelve una respuesta de prueba.
-        String response = "Consulta para el ID: " + id;
-        return ResponseEntity.ok(response);
-    }
+    // dejamos el GET provisorio, luego lo adaptamos al formato solicitado por el enunciado
 }

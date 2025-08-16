@@ -1,7 +1,9 @@
 package challenge.api_geo.service;
 
+import challenge.api_geo.config.RabbitMQConfig;
 import challenge.api_geo.dto.request.GeolocalizationRequestDTO;
 import challenge.api_geo.entity.GeolocalizationEntity;
+import challenge.api_geo.messaging.GeocodingRequestMessage;
 import challenge.api_geo.repository.GeolocalizationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -17,7 +19,7 @@ public class GeolocalizationService {
     private final RabbitTemplate rabbitTemplate;
 
     public UUID processGeolocalizationRequest(GeolocalizationRequestDTO request) {
-        // 1. Mapea el DTO a la entidad
+        // 1) Mapear y guardar en estado PROCESANDO
         GeolocalizationEntity entity = GeolocalizationEntity.builder()
                 .street(request.getStreet())
                 .number(request.getNumber())
@@ -28,14 +30,22 @@ public class GeolocalizationService {
                 .status("PROCESANDO")
                 .build();
 
-        // 2. Guarda la entidad en la base de datos
-        GeolocalizationEntity savedEntity = geolocalizationRepository.save(entity);
+        GeolocalizationEntity saved = geolocalizationRepository.save(entity);
 
-        // 3. Envía el mensaje a RabbitMQ
-        // Aquí debes definir el nombre del exchange y la cola para el Geocodificador
-        String geocodingQueue = "geocoding_requests_queue";
-        rabbitTemplate.convertAndSend(geocodingQueue, savedEntity);
+        // 2) Armar el mensaje para el geocodificador
+        GeocodingRequestMessage msg = new GeocodingRequestMessage(
+                saved.getId(),
+                saved.getStreet(),
+                saved.getNumber(),
+                saved.getCity(),
+                saved.getPostalCode(),
+                saved.getProvince(),
+                saved.getCountry()
+        );
 
-        return savedEntity.getId();
+        // 3) Enviar a la cola (default exchange → routingKey = nombre de la cola)
+        rabbitTemplate.convertAndSend(RabbitMQConfig.GEO_REQUESTS_QUEUE, msg);
+
+        return saved.getId();
     }
 }
