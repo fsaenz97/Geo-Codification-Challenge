@@ -1,4 +1,4 @@
-package challenge.geocodificador.dto.request;
+package challenge.geocodificador.messaging;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @Data @NoArgsConstructor @AllArgsConstructor
-public class GeocodingRequestMessageDTO {
+public class GeocodingRequestMessage {
     private UUID id;
     private String street;
     private String number;
