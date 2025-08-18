@@ -46,6 +46,19 @@ services:
     networks:
       - geonet
 
+  geocodificador:
+    build:
+      context: ./geocodificador
+      dockerfile: Dockerfile
+    container_name: geocodificador
+    depends_on:
+      geo-rabbitmq:
+        condition: service_healthy
+    environment:
+      - TZ=America/Argentina/Buenos_Aires
+    networks:
+      - geonet
+
 volumes:
   mysql_data:
 
