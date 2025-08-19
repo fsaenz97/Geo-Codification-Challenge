@@ -28,8 +28,8 @@ public class GeocodingRequestListener {
 
             var opt = nominatim.geocode(address);
             GeocodingResultMessage result = opt
-                    .map(c -> new GeocodingResultMessage(msg.getId(), c.latitude(), c.longitude(), "TERMINADO"))
-                    .orElseGet(() -> new GeocodingResultMessage(msg.getId(), null, null, "TERMINADO"));
+                    .map(c -> new GeocodingResultMessage(msg.getId(), c.latitude(), c.longitude(), "OK"))
+                    .orElseGet(() -> new GeocodingResultMessage(msg.getId(), null, null, "ERROR"));
 
             rabbitTemplate.convertAndSend(RabbitMQConfig.RESPONSES_QUEUE, result);
             log.info("Resultado publicado: {}", result);

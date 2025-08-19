@@ -5,9 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50610548-178a-4b52-90e5-f408d3f51179" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/geocodificador/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-geo/src/main/java/challenge/api_geo/controller/GeocodingQueryController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-geo/src/main/java/challenge/api_geo/dto/response/GeocodingStatusResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-geo/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/api-geo/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-geo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api-geo/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geocodificador/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/geocodificador/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geocodificador/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/geocodificador/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geocodificador/src/main/java/challenge/geocodificador/messaging/GeocodingRequestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/geocodificador/src/main/java/challenge/geocodificador/messaging/GeocodingRequestListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
