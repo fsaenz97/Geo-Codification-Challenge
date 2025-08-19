@@ -30,12 +30,17 @@ public class GeocodingResultListener {
         }
 
         GeolocalizationEntity e = opt.get();
+        String status = (message.getStatus() != null && !message.getStatus().isBlank())
+                ? message.getStatus()
+                : ((message.getLatitude() != null && message.getLongitude() != null) ? "OK" : "ERROR");
+
         e.setLatitude(message.getLatitude());
         e.setLongitude(message.getLongitude());
-        e.setStatus(message.getStatus() != null ? message.getStatus() : "TERMINADO");
+        e.setStatus(status);
 
         repository.save(e);
-        log.info("Entidad {} actualizada con lat={}, lon={}, estado={}",
+
+        log.info("Entidad {} actualizada -> lat={}, lon={}, estado={}",
                 e.getId(), e.getLatitude(), e.getLongitude(), e.getStatus());
     }
 }
