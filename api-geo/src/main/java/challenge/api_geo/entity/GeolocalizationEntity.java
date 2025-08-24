@@ -8,12 +8,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-@Entity
-@Table(name = "geolocalizations")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
+@Table(name = "geolocalizations")
 public class GeolocalizationEntity {
 
     @Id
@@ -30,18 +30,28 @@ public class GeolocalizationEntity {
     private String city;
 
     @Column(nullable = false)
-    private String postalCode;
-
-    @Column(nullable = false)
     private String province;
 
     @Column(nullable = false)
     private String country;
 
-    private Double latitude;
+    @Column(nullable = false)
+    private String postalCode;
 
+    private Double latitude;
     private Double longitude;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String status;
+    private Status status;
+
+    @Column(name = "error_code")
+    private String errorCode; // Ej: INVALID_ADDRESS, RABBIT_FAILURE
+
+    @Column(name = "error_message", columnDefinition = "TEXT")
+    private String errorMessage; // Mensaje legible para debugging
+
+    public enum Status {
+        PENDING, COMPLETED, ERROR
+    }
 }

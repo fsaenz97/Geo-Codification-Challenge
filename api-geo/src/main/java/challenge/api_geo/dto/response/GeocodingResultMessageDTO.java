@@ -15,3 +15,4 @@ public class GeocodingResultMessageDTO {
     private Double longitude;
     private String status;
 }
+

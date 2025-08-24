@@ -2,6 +2,7 @@ package challenge.api_geo.service;
 
 import challenge.api_geo.dto.response.GeocodingResultMessageDTO;
 import challenge.api_geo.entity.GeolocalizationEntity;
+import challenge.api_geo.entity.GeolocalizationEntity.Status;
 import challenge.api_geo.repository.GeolocalizationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,13 +31,23 @@ public class GeocodingResultListener {
         }
 
         GeolocalizationEntity e = opt.get();
-        String status = (message.getStatus() != null && !message.getStatus().isBlank())
-                ? message.getStatus()
-                : ((message.getLatitude() != null && message.getLongitude() != null) ? "OK" : "ERROR");
+
+        // Mapear status del geocodificador → enum interno
+        Status newStatus = "OK".equalsIgnoreCase(message.getStatus())
+                ? Status.COMPLETED
+                : Status.ERROR;
 
         e.setLatitude(message.getLatitude());
         e.setLongitude(message.getLongitude());
-        e.setStatus(status);
+        e.setStatus(newStatus);
+
+        if (newStatus == Status.ERROR) {
+            e.setErrorCode("GEOCODER_ERROR");
+            e.setErrorMessage("El geocodificador devolvió status=ERROR o coordenadas vacías.");
+        } else {
+            e.setErrorCode(null);
+            e.setErrorMessage(null);
+        }
 
         repository.save(e);
 

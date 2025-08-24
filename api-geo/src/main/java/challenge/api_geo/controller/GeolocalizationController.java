@@ -34,6 +34,4 @@ public class GeolocalizationController {
                 .location(location)
                 .body(new IdResponseDTO(requestId.toString()));
     }
-
-    // dejamos el GET provisorio, luego lo adaptamos al formato solicitado por el enunciado
 }
