@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50610548-178a-4b52-90e5-f408d3f51179" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-geo/src/main/java/challenge/api_geo/controller/GeocodingQueryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-geo/src/main/java/challenge/api_geo/controller/GeocodingQueryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-geo/src/main/java/challenge/api_geo/dto/response/GeocodingResultMessageDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-geo/src/main/java/challenge/api_geo/dto/response/GeocodingResultMessageDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-geo/src/main/java/challenge/api_geo/dto/response/GeocodingStatusResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-geo/src/main/java/challenge/api_geo/dto/response/GeocodingStatusResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-geo/src/main/java/challenge/api_geo/service/GeocodingResultListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-geo/src/main/java/challenge/api_geo/service/GeocodingResultListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/geocodificador/src/main/java/challenge/geocodificador/messaging/GeocodingRequestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/geocodificador/src/main/java/challenge/geocodificador/messaging/GeocodingRequestListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/geocodificador/src/main/java/challenge/geocodificador/messaging/GeocodingResultMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/geocodificador/src/main/java/challenge/geocodificador/messaging/GeocodingResultMessage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +22,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
