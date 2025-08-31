@@ -48,7 +48,7 @@ public class GeolocalizationService {
         return saved.getId(); // UUID
     }
 
-     // Devuelve la entidad cruda (por si la necesita tu controller actual).
+     // Devuelve la entidad cruda.
     public Optional<GeolocalizationEntity> findById(UUID id) {
         return repository.findById(id);
     }

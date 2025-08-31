@@ -22,36 +22,54 @@ public class GeocodingResultListener {
 
     @RabbitListener(queues = RESPONSES_QUEUE)
     public void onMessage(GeocodingResultMessageDTO message) {
-        log.info("Respuesta recibida: {}", message);
+        log.info("📩 Respuesta recibida (raw): id={} status={} lat={} lon={}",
+                message.getId(), message.getStatus(), message.getLatitude(), message.getLongitude());
 
         Optional<GeolocalizationEntity> opt = repository.findById(message.getId());
         if (opt.isEmpty()) {
-            log.warn("No se encontró la entidad con id {}", message.getId());
+            log.warn("⚠️ No se encontró la entidad con id {}", message.getId());
             return;
         }
 
-        GeolocalizationEntity e = opt.get();
+        GeolocalizationEntity entity = opt.get();
+        String statusMsg = message.getStatus() == null ? "" : message.getStatus().trim();
 
-        // Mapear status del geocodificador → enum interno
-        Status newStatus = "OK".equalsIgnoreCase(message.getStatus())
-                ? Status.COMPLETED
-                : Status.ERROR;
+        boolean statusIndicatesSuccess = "OK".equalsIgnoreCase(statusMsg)
+                || "TERMINADO".equalsIgnoreCase(statusMsg)
+                || "COMPLETADO".equalsIgnoreCase(statusMsg);
 
-        e.setLatitude(message.getLatitude());
-        e.setLongitude(message.getLongitude());
-        e.setStatus(newStatus);
+        boolean hasCoordinates = message.getLatitude() != null && message.getLongitude() != null;
 
-        if (newStatus == Status.ERROR) {
-            e.setErrorCode("GEOCODER_ERROR");
-            e.setErrorMessage("El geocodificador devolvió status=ERROR o coordenadas vacías.");
+        Status newStatus;
+        String errorCode = null;
+        String errorMessage = null;
+
+        if (statusIndicatesSuccess && hasCoordinates) {
+            newStatus = Status.COMPLETED;
+            entity.setLatitude(message.getLatitude());
+            entity.setLongitude(message.getLongitude());
+        } else if (!statusIndicatesSuccess) {
+            newStatus = Status.ERROR;
+            errorCode = "GEOCODER_STATUS_INVALID";
+            errorMessage = "El geocodificador devolvio status='" + statusMsg + "'";
+            entity.setLatitude(null);
+            entity.setLongitude(null);
         } else {
-            e.setErrorCode(null);
-            e.setErrorMessage(null);
+            newStatus = Status.ERROR;
+            errorCode = "GEOCODER_NO_COORDS";
+            errorMessage = "El geocodificador funciona pero devolvio coordenadas nulas.";
+            entity.setLatitude(null);
+            entity.setLongitude(null);
         }
 
-        repository.save(e);
+        entity.setStatus(newStatus);
+        entity.setErrorCode(errorCode);
+        entity.setErrorMessage(errorMessage);
 
-        log.info("Entidad {} actualizada -> lat={}, lon={}, estado={}",
-                e.getId(), e.getLatitude(), e.getLongitude(), e.getStatus());
+        repository.save(entity);
+
+        log.info("🔁 Entidad actualizada: id={} newStatus={} lat={} lon={} errorCode={} errorMsg={}",
+                entity.getId(), entity.getStatus(), entity.getLatitude(), entity.getLongitude(),
+                entity.getErrorCode(), entity.getErrorMessage());
     }
 }

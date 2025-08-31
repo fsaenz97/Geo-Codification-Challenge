@@ -37,17 +37,17 @@ public class GeocodingQueryController {
                                 null,
                                 null,
                                 "NOT_FOUND",
-                                "No existe ninguna operación con el id " + id
+                                "No existe ninguna operacion con el id " + id
                         )));
     }
 
     private String buildStatusMessage(GeolocalizationEntity entity) {
         return switch (entity.getStatus()) {
-            case PENDING -> "La geocodificación sigue en proceso.";
-            case COMPLETED -> "La geocodificación se completó correctamente.";
+            case PENDING -> "La geocodificacion sigue en proceso.";
+            case COMPLETED -> "La geocodificacion se completo correctamente.";
             case ERROR -> entity.getErrorMessage() != null
                     ? "Hubo un error: " + entity.getErrorMessage()
-                    : "La geocodificación falló por un error desconocido.";
+                    : "La geocodificacion fallo por un error desconocido.";
         };
     }
 }

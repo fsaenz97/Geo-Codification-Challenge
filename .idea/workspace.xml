@@ -5,8 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50610548-178a-4b52-90e5-f408d3f51179" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-geo/src/test/java/challenge/api_geo/controller/GeocodingQueryControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-geo/src/test/java/challenge/api_geo/controller/GeolocalizationControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-geo/src/test/java/challenge/api_geo/service/GeocodingResultListenerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-geo/src/test/java/challenge/api_geo/service/GeolocalizationServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/geocodificador/src/test/java/challenge/geocodificador/messaging/GeocodingRequestListenerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-geo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api-geo/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-geo/src/main/java/challenge/api_geo/controller/GeocodingQueryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-geo/src/main/java/challenge/api_geo/controller/GeocodingQueryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-geo/src/main/java/challenge/api_geo/service/GeocodingResultListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-geo/src/main/java/challenge/api_geo/service/GeocodingResultListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-geo/src/main/java/challenge/api_geo/service/GeolocalizationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-geo/src/main/java/challenge/api_geo/service/GeolocalizationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-geo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api-geo/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-geo/src/test/java/challenge/api_geo/ApiGeoApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/geocodificador/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/geocodificador/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geocodificador/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/geocodificador/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/geocodificador/src/test/java/challenge/geocodificador/GeocodificadorApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +39,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
