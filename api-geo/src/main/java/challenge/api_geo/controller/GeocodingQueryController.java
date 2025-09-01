@@ -3,6 +3,11 @@ package challenge.api_geo.controller;
 import challenge.api_geo.dto.response.GeocodingStatusResponseDTO;
 import challenge.api_geo.entity.GeolocalizationEntity;
 import challenge.api_geo.service.GeolocalizationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,19 +19,31 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Consulta de geocodificacion", description = "Permite consultar el estado de una solicitud de geolocalizacion")
 public class GeocodingQueryController {
 
     private final GeolocalizationService geolocalizationService;
 
     @GetMapping("/geocodificar")
-    public ResponseEntity<GeocodingStatusResponseDTO> get(@RequestParam("id") UUID id) {
+    @Operation(
+            summary = "Consultar estado de geocodificacion",
+            description = "Obtiene el estado actual de una solicitud de geocodificacion mediante su identificador unico (UUID)."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Solicitud encontrada, devuelve su estado"),
+            @ApiResponse(responseCode = "404", description = "No existe ninguna operacion con ese ID")
+    })
+    public ResponseEntity<GeocodingStatusResponseDTO> get(
+            @Parameter(description = "Identificador único de la solicitud", required = true)
+            @RequestParam("id") UUID id) {
+
         return geolocalizationService.findById(id)
                 .map(entity -> {
                     GeocodingStatusResponseDTO response = new GeocodingStatusResponseDTO(
                             entity.getId().toString(),
                             entity.getLatitude(),
                             entity.getLongitude(),
-                            entity.getStatus().name(), // PENDING, COMPLETED, ERROR
+                            entity.getStatus().name(),
                             buildStatusMessage(entity)
                     );
                     return ResponseEntity.ok(response);
